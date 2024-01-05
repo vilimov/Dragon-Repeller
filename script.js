@@ -97,7 +97,7 @@ const locations = [
     name: "easter egg",
     "button text": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "Към центъра?"],
     "button functions": [pickOne, pickTwo, pickThree, pickFour, pickFive, pickSix, pickSeven, pickEight, pickNine, goTown],
-    text: "Ти откри тайна игра. Избери си число. Пет числа между 0 и 9 ще бъдат избрани случайно. Ако числото, което си избрал съвпада с едно от случайно избраните, печелиш 20 жълтици. Но ако избраното от теб число не е сред случайно избраните, губиш 10 единици от живота си!"
+    text: "Ти откри тайна игра. Избери си число. Пет числа между 1 и 9 ще бъдат избрани случайно. Ако числото, което си избрал съвпада с едно от случайно избраните, печелиш 20 жълтици. Но ако избраното от теб число не е сред случайно избраните, губиш 10 единици от живота си!"
   }
 ];
 
@@ -282,7 +282,7 @@ function restart() {
 }
 
 function easterEgg() {
-  if (Math.floor(Math.random() * 2) % 1 === 0) {
+  if (Math.floor(Math.random() * 2) % 2 === 0) {
     update(locations[7]);
     additionalButtons.forEach(button => {
       button.style.display = "inline-block";
