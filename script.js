@@ -4,7 +4,7 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = ["бастун"];
+let inventory = ["прът"];
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
@@ -26,7 +26,7 @@ const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
 const weapons = [
-  { name: 'бастун', power: 5 },
+  { name: 'прът', power: 5 },
   { name: 'сатър', power: 30 },
   { name: 'боздуган', power: 50 },
   { name: 'меч', power: 100 }
@@ -67,31 +67,31 @@ const locations = [
     name: "cave",
     "button text": ["Бий се с таласъм", "Бий се с караконджул", "Към центъра на града"],
     "button functions": [fightSlime, fightBeast, goTown],
-    text: "Ти влезе в пещерата. Виждаш някакви дзверове."
+    text: "Ти влезе в пещерата. Виждаш някакви чудовища."
   },
   {
     name: "fight",
-    "button text": ["Атакувай", "Пай се", "Бегаааай"],
+    "button text": ["Атакувай!", "Пази се!", "Бягай!"],
     "button functions": [attack, dodge, goTown],
-    text: "Ти се биеш с дзверовете."
+    text: "Ти се биеш с чудовищата."
   },
   {
     name: "kill monster",
-    "button text": ["Към центъра", "Оди у центъра", "Абе оди у центъра, бе"],
+    "button text": ["Към центъра", "Към центъра", "Към центъра"],
     "button functions": [easterEgg, easterEgg, easterEgg],
-    text: 'Дзвера вика "Майкоу!" и се гътва. Ти печелиш опит и жълтици.'
+    text: 'Чудовището надава предсмъртен рев "Аррррр!" и пада безжизнено. Ти печелиш опит и жълтици.'
   },
   {
     name: "lose",
-    "button text": ["Опитай пак?", "Пробвай пак?", "Ела ми пак, бе?"],
+    "button text": ["Опитай пак", "Опитай пак", "Опитай пак"],
     "button functions": [restart, restart, restart],
-    text: "☠️☠️☠️ Бах те у живота и ти свърши!!! ☠️☠️☠️"
+    text: "☠️ Ти изгуби!!! Но винаги можеш да опиташ пак. 😉"
   },
   {
     name: "win",
-    "button text": ["Опитай пак?", "Пробвай пак?", "Ела ми пак, бе?"],
+    "button text": ["Опитай пак", "Опитай пак", "Опитай пак"],
     "button functions": [restart, restart, restart],
-    text: "🎉 Ти победи дракона! Евала, машина! 🎉"
+    text: "🎉 Ти победи дракона! 🎉"
   },
   {
     name: "easter egg",
@@ -134,11 +134,9 @@ function goTown() {
 function goStore() {
   update(locations[1]);
   text.innerText += " В твоята оръжейна има: " + inventory + ".";
-  if (health < 50) {
-    text.innerText += " Ама нещо болнав ми изглеждаш, вуйче!";
-  } else {
-    text.innerText += " И си здрав като бик и почти толкова умен!";
-  }
+  if (health < 30) {
+    text.innerText += " Може би трябва да помислиш за здравето си! 😉";
+  } 
 }
 
 function goCave() {
@@ -151,13 +149,9 @@ function buyHealth() {
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
-    if (health < 50) {
-      text.innerText = "Сипи, ако нема, донеси.";
-    } else {
-      text.innerText = "Евалата здравеняк!";
-    }
+    text.innerText = "Здравето ти вече е " + health + ".";
   } else {
-    text.innerText = "Е немаш достатъчно жълтици, за да си купиш здраве, баце! Ама споко, то и без това здраве с пари не се купува.";
+    text.innerText = "Нямаш достатъчно жълтици, за да си купиш здраве.";
   }
 }
 
@@ -172,7 +166,7 @@ function buyWeapon() {
       inventory.push(newWeapon);
       text.innerText += " В твоята оръжейна има: " + inventory.join(", ") + ".";
     } else {
-      text.innerText = "Епа немаш достатъчно жълтици, за да си купиш оръжие, бе прошляк!";
+      text.innerText = "Нямаш достатъчно жълтици, за да си купиш оръжие.";
     }
   } else {
     text.innerText = "Ти вече притежаваш най-могъщото оръжие!";
@@ -187,9 +181,9 @@ function sellWeapon() {
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
     text.innerText = "Ти продаде " + currentWeapon + ".";
-    text.innerText += " В твоята оръжейна имаш: " + inventory;
+    text.innerText += " В твоята оръжейна имаш: " + inventory.join(", ") + ".";
   } else {
-    text.innerText = "Не продавай единственото си оръжие, бе бунак!";
+    text.innerText = "Не можеш да продадеш единственото си оръжие.";
   }
 }
 
@@ -217,7 +211,7 @@ function goFight() {
 }
 
 function attack() {
-  text.innerText = "Оня дзвер " + monsters[fighting].name + "а атакува.";
+  text.innerText = "Внимавай, " + monsters[fighting].name + "а атакува.";
   text.innerText += " Ти го атакуваш с твоят " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
   if (isMonsterHit()) {
@@ -274,7 +268,7 @@ function restart() {
   health = 100;
   gold = 50;
   currentWeapon = 0;
-  inventory = ["бастун"];
+  inventory = ["прът"];
   goldText.innerText = gold;
   healthText.innerText = health;
   xpText.innerText = xp;
@@ -341,7 +335,7 @@ function pick(guess) {
     gold += 20;
     goldText.innerText = gold;
   } else {
-    text.innerText += "Язък! Ти изгуби 10 единици от здравето си!";
+    text.innerText += "Жалко! Ти изгуби 10 единици от здравето си!";
     health -= 10;
     if (health <= 0) {
       healthText.innerText = "0";
