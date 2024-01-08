@@ -12,3 +12,4 @@ Technologies used :
 * HTML
 * CSS
 * JS
+* Background image created with [**AI Image Generator**](https://deepai.org/machine-learning-model/text2img)  
