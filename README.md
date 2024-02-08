@@ -1,4 +1,4 @@
-# RPG - Dragon Repeller (Повелителят на драконите)
+# RPG - [Dragon Repeller (Повелителят на драконите)](https://vilimov.github.io/Dragon-Repeller/)
 Tiny Role Playing Game created upon the ***freeCodeCamp tutorial***  
 [**"JavaScript Algorithms and Data Structures"**](  
 https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8)
